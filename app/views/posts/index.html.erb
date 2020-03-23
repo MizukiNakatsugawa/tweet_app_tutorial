@@ -9,18 +9,17 @@
   </ul>
 </header>
 
-<!-- ここに変数post1を定義して、指定された投稿内容を代入してください -->
-<% post1 = "今日からProgateでRailsの勉強するよー！" %>
-<!-- ここに変数post2を定義して、指定された投稿内容を代入してください -->
-<% post2 = "投稿一覧ページ作成中！" %>
+<%
+  posts = ["今日からProgateでRailsの勉強するよー！", "投稿一覧ページ作成中！"]
+%>
 
 <div class="main posts-index">
   <div class="container">
+    <% posts.each do |post| %>
     <div class="posts-index-item">
-      <%= post1 %>
+      <%= post %>
     </div>
-    <div class="posts-index-item">
-      <%= post2 %>
-    </div>
+    <% end %>
+
   </div>
 </div>
