@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, {only:[:index, :show, :edit, :update]}
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
@@ -39,11 +39,13 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @user.name = params[:name]
     @user.email = params[:email]
+
     if params[:image]
       @user.image_name = "#{@user.id}.jpg"
       image = params[:image]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
+
     if @user.save
       flash[:notice] = "ユーザー情報を編集しました"
       redirect_to("/users/#{@user.id}")
@@ -56,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: params[:email], password: params[:pasword])
+    @user = User.find_by(email: params[:email], password: params[:password])
     if @user
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
@@ -73,6 +75,14 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "ログアウトしました"
     redirect_to("/login")
+  end
+
+  def likes
+    # 変数@userを定義してください
+    @user = User.find_by(id: params[:id])
+
+    # 変数@likesを定義してください
+    @likes = Like.where(user_id: @user.id)
   end
 
   def ensure_correct_user
