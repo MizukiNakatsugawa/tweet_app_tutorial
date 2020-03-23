@@ -12,8 +12,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(content: params[:content])
-    @post.save
-    redirect_to("/posts/index")
+    if @post.save
+      redirect_to("/posts/index")
+    else
+      render("posts/new")
+    end
   end
 
   def edit
@@ -24,9 +27,9 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @post.content = params[:content]
     if @post.save
+      flash[:notice] = "投稿を編集しました"
       redirect_to("/posts/index")
     else
-      # renderメソッドを用いて、editアクションを経由せず、posts/edit.html.erbが表示されるようにしてください
       render("posts/edit")
     end
   end
