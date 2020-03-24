@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  post "likes/:post_id/create" => "likes#create"
-  post "likes/:post_id/destroy" => "likes#destroy"
+  get "likes/:post_id/create" => "likes#create"
+  get "likes/:post_id/destroy" => "likes#destroy"
 
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
@@ -9,9 +9,8 @@ Rails.application.routes.draw do
   get "users/index" => "users#index"
   get "users/:id" => "users#show"
   post "login" => "users#login"
-  post "logout" => "users#logout"
+  get "logout" => "users#logout"
   get "login" => "users#login_form"
-  # "users/:id/likes"に対応するルーティングを追加してください
   get "users/:id/likes" => "users#likes"
 
   get "posts/index" => "posts#index"
@@ -20,7 +19,7 @@ Rails.application.routes.draw do
   post "posts/create" => "posts#create"
   get "posts/:id/edit" => "posts#edit"
   post "posts/:id/update" => "posts#update"
-  post "posts/:id/destroy" => "posts#destroy"
+  get "posts/:id/destroy" => "posts#destroy"
 
   get "/" => "home#top"
   get "about" => "home#about"
