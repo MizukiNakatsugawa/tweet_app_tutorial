@@ -2,8 +2,8 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="post-user-name">
-        <!-- ユーザーの画像が表示されるところを削除した -->
-        <%= @user.name %>
+        <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <%= link_to(@user.name, "/users/#{@user.id}") %>
       </div>
       <p>
         <%= @post.content %>
@@ -20,9 +20,7 @@
           <span class="fa fa-heart like-btn"></span>
         <% end %>
       <% end %>
-      <!-- 変数@likes_countを表示してください -->
       <%= @likes_count %>
-
       <% if @post.user_id == @current_user.id %>
         <div class="post-menus">
           <%= link_to("編集", "/posts/#{@post.id}/edit") %>

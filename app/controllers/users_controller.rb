@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update, :comfirm]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
@@ -77,11 +77,19 @@ class UsersController < ApplicationController
     redirect_to("/login")
   end
 
-  def likes
-    # 変数@userを定義してください
-    @user = User.find_by(id: params[:id])
+  def destroy
+    @user = User.find_by(id: @current_user.id)
+    @posts = Post.where(user_id: @user.id)
+    @likes = Like.where(user_id: @user.id)
+    @user.destroy
+    @posts.destroy_all
+    @likes.destroy_all
+    flash[:notice] = "アカウントを削除しました"
+    redirect_to("/login")
+  end
 
-    # 変数@likesを定義してください
+  def likes
+    @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
   end
 

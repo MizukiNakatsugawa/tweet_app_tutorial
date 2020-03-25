@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  #progateでpostにすべきところをpostにするとエラーが出る
+  #getにするとエラーが出ない　なぜ？
+
   get "likes/:post_id/create" => "likes#create"
   get "likes/:post_id/destroy" => "likes#destroy"
 
+  post "users/:id/destroy" => "users#destroy"
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
   post "users/create" => "users#create"
@@ -23,4 +27,5 @@ Rails.application.routes.draw do
 
   get "/" => "home#top"
   get "about" => "home#about"
+  get "comfirm" => "home#comfirm"
 end

@@ -17,6 +17,12 @@
         <input name="email" value="<%= @user.email %>">
         <input type="submit" value="保存">
         <% end %>
+        <%= form_tag("/users/#{@user.id}/destroy") do  %>
+        <input id="destroy" type="submit" value="削除">
+        <% end %>
+        <%= link_to("/comfirm") do %>
+        <input type="submit" value="18禁" style="border: none;">
+        <% end %>
       </div>
     </div>
   </div>

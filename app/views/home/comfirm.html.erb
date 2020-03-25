@@ -1,0 +1,16 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">年齢確認</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <p>あなたは１８歳以上ですか？</p>
+        <%= link_to("https://www.dmm.co.jp/digital/videoa/") do %>
+        <input type="submit" value="はい">
+        <% end %>
+        <%= link_to("/users/#{@current_user.id}/edit") do  %>
+        <input type="submit" value="いいえ">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
